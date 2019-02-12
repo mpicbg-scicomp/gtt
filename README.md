@@ -1,6 +1,11 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.4
+- Add open/close tags for issues
+- Person based view for specific user
+- Collect project description tags in title
+
 ## 1.0.3
 - Add quarter based time ranges in predefined links
 - Use Project name instead of project id
