@@ -1,6 +1,9 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.5
+- Add more projects with comma (Thanks to [@lhersemann](https://github.com/lhersemann))
+
 ## 1.0.4
 - Add open/close tags for issues
 - Person based view for specific user
