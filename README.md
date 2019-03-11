@@ -1,6 +1,10 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.6
+- More consistent handling for date-range
+- If not authorized, the label list becomes diabled
+
 ## 1.0.5
 - Add more projects with comma (Thanks to [@lhersemann](https://github.com/lhersemann))
 
