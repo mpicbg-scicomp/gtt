@@ -1,6 +1,10 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.7
+- Export button is added
+- Opening link is written by the given URL from the project detail
+
 ## 1.0.6
 - More consistent handling for date-range
 - If not authorized, the label list becomes diabled
