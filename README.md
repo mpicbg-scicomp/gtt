@@ -1,6 +1,9 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.8
+- Small fixes based on [@IanHenry](https://github.com/IanHenry)
+
 ## 1.0.7
 - Export button is added
 - Opening link is written by the given URL from the project detail
