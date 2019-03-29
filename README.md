@@ -2,7 +2,7 @@
 Gitlab Time Tracker App for in-house use
 
 ## 1.0.8
-- Small fixes based on [@IanHenry](https://github.com/IanHenry)
+- Small fixes based on [@IanHenry](https://github.com/IanHenry)'s comments
 
 ## 1.0.7
 - Export button is added
