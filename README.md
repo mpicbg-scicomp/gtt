@@ -1,6 +1,9 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.9
+- Minor update as a new member has joined in the team
+
 ## 1.0.8
 - Small fixes based on [@IanHenry](https://github.com/IanHenry)'s comments
 
