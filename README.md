@@ -1,6 +1,9 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.10
+- Bug fixed for calling typescript function
+
 ## 1.0.9
 - Minor update as a new member has joined in the team
 
