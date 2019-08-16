@@ -1,6 +1,9 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.11
+- Refresh call at a time policy applied
+
 ## 1.0.10
 - Bug fixed for calling typescript function
 
