@@ -1,6 +1,10 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.12
+- Disable automatic refresh
+- Refresh button enabled when the exception happens
+
 ## 1.0.11
 - Refresh call at a time policy applied
 
