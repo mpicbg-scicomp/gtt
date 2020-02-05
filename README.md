@@ -1,6 +1,10 @@
 # gtt
 Gitlab Time Tracker App for in-house use
 
+## 1.0.13
+- The first public release
+- Support "removed time spent' tag
+
 ## 1.0.12
 - Disable automatic refresh
 - Refresh button enabled when the exception happens
