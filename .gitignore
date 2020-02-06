@@ -1,5 +1,13 @@
-node_modules
-dist
-
-package-lock.json
+.DS_Store
+dist/electron/*
+dist/web/*
+build/*
+!build/icons
+coverage
+node_modules/
+npm-debug.log
+npm-debug.log.*
+thumbs.db
+!.gitkeep
 yarn.lock
+package-lock.json
