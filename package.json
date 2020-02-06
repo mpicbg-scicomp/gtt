@@ -1,0 +1,189 @@
+{
+  "name": "gtt",
+  "version": "1.1.0",
+  "author": "HongKee Moon <moon@mpi-cbg.de>",
+  "description": "Gitlab time tracker",
+  "license": "BSD-3-Clause",
+  "main": "./dist/electron/main.js",
+  "scripts": {
+    "build": "node .electron-vue/build.js && electron-builder",
+    "build:dir": "node .electron-vue/build.js && electron-builder --dir",
+    "build:clean": "cross-env BUILD_TARGET=clean node .electron-vue/build.js",
+    "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
+    "publish:win": "node .electron-vue/build.js && node ./node_modules/electron-builder/out/cli/cli.js --win -p always",
+    "publish:mac": "node .electron-vue/build.js && node ./node_modules/electron-builder/out/cli/cli.js --mac -p always",
+    "publish:linux": "node .electron-vue/build.js && node ./node_modules/electron-builder/out/cli/cli.js --linux -p always",
+    "dev": "node .electron-vue/dev-runner.js",
+    "e2e": "npm run pack && mocha test/e2e",
+    "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src test",
+    "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src test",
+    "pack": "npm run pack:main && npm run pack:renderer",
+    "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
+    "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
+    "test": "npm run unit && npm run e2e",
+    "unit": "karma start test/unit/karma.conf.js",
+    "postinstall": "npm run lint:fix",
+    "serve": "vue-cli-service serve",
+    "storybook": "start-storybook -p 9001 -c .storybook"
+  },
+  "build": {
+    "productName": "gtt",
+    "appId": "de.mpi-cbg.scicomp.gtt",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "dist/electron/**/*"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "icon": "build/icons/icon.icns",
+      "type": "development",
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "icon": "build/icons/icon.ico",
+      "certificateFile": "cert.p12",
+      "certificatePassword": "",
+      "publisherName": "MPI-CBG Scientific Computing Facility"
+    },
+    "nsis": {
+      "perMachine": true
+    },
+    "linux": {
+      "icon": "build/icons",
+      "vendor": "MPI-CBG Scientific Computing Facility",
+      "category": "Science",
+      "target": [
+        "AppImage"
+      ]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "mpicbg-scicomp",
+        "repo": "gtt"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:mpicbg-scicomp/gtt.git"
+  },
+  "dependencies": {
+    "@amcharts/amcharts4": "^4.0.9",
+    "@johmun/vue-tags-input": "^2.0.0",
+    "axios": "^0.18.0",
+    "datatables.net": "^1.10.19",
+    "electron-log": "^2.2.17",
+    "electron-store": "^5.1.0",
+    "electron-updater": "^4.0.6",
+    "gitlab-time-tracker": "hkmoon/gitlab-time-tracker#master",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.23.0",
+    "tsv": "^0.2.0",
+    "vue": "^2.6.2",
+    "vue-electron": "^1.0.6",
+    "vue-router": "^3.0.1",
+    "vue2-datepicker": "^2.8.0",
+    "vuex": "^3.0.1",
+    "vuex-electron": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@storybook/addon-actions": "^4.0.11",
+    "@storybook/addon-knobs": "^4.0.11",
+    "@storybook/addon-options": "^4.0.11",
+    "@storybook/addon-storysource": "^4.0.11",
+    "@storybook/addons": "^4.0.11",
+    "@storybook/vue": "^4.0.11",
+    "@typescript-eslint/parser": "^1.3.0",
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.1",
+    "@vue/cli-plugin-typescript": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "ajv": "^6.5.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-istanbul": "^4.1.6",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-vue": "^2.0.2",
+    "babel-register": "^6.26.0",
+    "babili-webpack-plugin": "^0.1.2",
+    "cfonts": "^2.1.2",
+    "chai": "^4.1.2",
+    "chalk": "^2.4.1",
+    "copy-webpack-plugin": "^4.5.1",
+    "cross-env": "^5.1.6",
+    "css-loader": "^0.28.11",
+    "del": "^3.0.0",
+    "devtron": "^1.4.0",
+    "electron": "^3.1.2",
+    "electron-builder": "^20.38.4",
+    "electron-debug": "^1.5.0",
+    "electron-devtools-installer": "^2.2.4",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-import-resolver-webpack": "^0.10.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-html": "^4.0.3",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-vue": "^4.7.1",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "inject-loader": "^4.0.1",
+    "karma": "^2.0.2",
+    "karma-chai": "^0.1.0",
+    "karma-coverage": "^1.1.2",
+    "karma-electron": "^6.0.0",
+    "karma-mocha": "^1.3.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "^0.0.32",
+    "karma-webpack": "^3.0.0",
+    "mini-css-extract-plugin": "0.4.0",
+    "mocha": "^5.2.0",
+    "multispinner": "^0.2.1",
+    "node-loader": "^0.6.0",
+    "node-sass": "^4.9.2",
+    "postcss": "^7.0.6",
+    "postcss-loader": "^3.0.0",
+    "pug": "^2.0.3",
+    "require-dir": "^1.0.0",
+    "sass-loader": "^7.0.3",
+    "spectron": "^3.8.0",
+    "style-loader": "^0.21.0",
+    "tailwindcss": "^0.7.2",
+    "ts-loader": "^5.3.1",
+    "typescript": "^3.3.3",
+    "url-loader": "^1.0.1",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-hot-middleware": "^2.22.2",
+    "webpack-merge": "^4.1.3"
+  }
+}
