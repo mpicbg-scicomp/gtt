@@ -27,13 +27,6 @@
   let billingClassTable = {};
   let categoryTable = {};
 
-  if (store.has('pref')) {
-    const pref = store.get('pref');
-
-    billingClassTable = JSON.parse(pref.userGroups);
-    categoryTable = JSON.parse(pref.tagColors);
-  }
-
   const _ = require('lodash');
   const $ = window.jQuery = require('jquery');
   require('./js/datatable');
@@ -522,6 +515,14 @@
     },
     mounted() {
       const vm = this;
+
+      if (store.has('pref')) {
+        const pref = store.get('pref');
+
+        billingClassTable = JSON.parse(pref.userGroups);
+        categoryTable = JSON.parse(pref.tagColors);
+      }
+
       vm.createTable(vm.id, vm.data);
     },
   };
