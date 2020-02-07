@@ -3,6 +3,7 @@
 ## 1.1.0
 - The public version of gtt starts from this version
 - User projects are supported
+- Fixed legend misaligned text
 
 ## 1.0.13
 - The first public release
