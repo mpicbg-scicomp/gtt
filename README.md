@@ -8,9 +8,14 @@ This application gives an overview of team spent times on specific projects and 
 ## How to organize the issues with labs
 Each project has ```topics``` attribute in the gitlab project setting where we add relevant keywords. ```gtt``` parses the specific form of string, ```title: Gitlab Time Tracker, contact: HongKee Moon, group: SCICOMP``` where it accumulate times along with ```title``` and ```group``` for the project management purpose even though other uses spent their time. ```contact``` information is used for specifying who project is for. Those information is visualized in ```Spent time in projects``` and ```Spent time in labs``` pie charts.
 
+![project_topics](img/gtt_project_topics.png)
+You can describe your project with topics and special tags for ```gtt```
+
 ![spent_time_in_projects](img/gtt_spent_time_in_projects.png)
+Project title is used for the chart label.
 
 ![spent_time_in_labs](img/gtt_spent_time_in_labs.png)
+Lab based pie chart uses ```group: SCICOMP``` tag.
 
 ## Preference
 
