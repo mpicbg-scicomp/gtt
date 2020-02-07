@@ -17,6 +17,16 @@
 import Vue from 'vue';
 import { parseProjectTags } from './js/Utils';
 
+const am4core = require('@amcharts/amcharts4/core');
+const am4charts = require('@amcharts/amcharts4/charts');
+const am4themesAnimated = require('@amcharts/amcharts4/themes/animated').default;
+// const am4themes_material = require('@amcharts/amcharts4/themes/material').default
+
+// Themes begin
+am4core.useTheme(am4themesAnimated);
+// am4core.useTheme(am4themes_material);
+// Themes end
+
 const _ = require('lodash');
 const moment = require('moment');
 
@@ -57,15 +67,6 @@ export default Vue.extend({
     },
     drawChart() {
       const vm = this;
-      const am4core = require('@amcharts/amcharts4/core');
-      const am4charts = require('@amcharts/amcharts4/charts');
-      const am4themesAnimated = require('@amcharts/amcharts4/themes/animated').default;
-      // const am4themes_material = require('@amcharts/amcharts4/themes/material').default
-
-      // Themes begin
-      am4core.useTheme(am4themesAnimated);
-      // am4core.useTheme(am4themes_material);
-      // Themes end
 
       const chart = am4core.create(vm.$refs.dailyChart, am4charts.XYChart);
       chart.colors.step = 2;
@@ -186,15 +187,6 @@ export default Vue.extend({
     },
     drawPieChart() {
       const vm = this;
-      const am4core = require('@amcharts/amcharts4/core');
-      const am4charts = require('@amcharts/amcharts4/charts');
-      // const am4themesAnimated = require('@amcharts/amcharts4/themes/animated').default;
-      // const am4themes_material = require('@amcharts/amcharts4/themes/material').default
-
-      // Themes begin
-      // am4core.useTheme(am4themesAnimated);
-      // am4core.useTheme(am4themes_material);
-      // Themes end
 
       const chart = am4core.create(vm.$refs.projectChart, am4charts.PieChart);
 
@@ -230,7 +222,6 @@ export default Vue.extend({
       const legendContainer = am4core.create('legenddiv', am4core.Container);
       legendContainer.width = am4core.percent(100);
       legendContainer.height = am4core.percent(100);
-      chart.legend.parent = legendContainer;
 
       function resizeLegend() {
         const el: HTMLElement | null = document.getElementById('legenddiv');
@@ -241,7 +232,7 @@ export default Vue.extend({
             el.style.height = newHeight;
             setTimeout(() => {
               chart.legend.labels.template.width = am4core.percent(100);
-            }, 3000);
+            }, 100);
           }
         }
       }
@@ -249,6 +240,7 @@ export default Vue.extend({
       chart.legend.events.on('sizechanged', resizeLegend);
       chart.legend.events.on('datavalidated', resizeLegend);
 
+      chart.legend.parent = legendContainer;
       // chart.legend.labels.template.truncate = true;
       // chart.legend.labels.template.fullWords = false;
       // chart.legend.itemContainers.template.width = am4core.percent(100);
@@ -256,15 +248,6 @@ export default Vue.extend({
     },
     drawLabPieChart() {
       const vm = this;
-      const am4core = require('@amcharts/amcharts4/core');
-      const am4charts = require('@amcharts/amcharts4/charts');
-      // const am4themesAnimated = require('@amcharts/amcharts4/themes/animated').default;
-      // const am4themes_material = require('@amcharts/amcharts4/themes/material').default
-
-      // Themes begin
-      // am4core.useTheme(am4themesAnimated);
-      // am4core.useTheme(am4themes_material);
-      // Themes end
 
       const chart = am4core.create(vm.$refs.labChart, am4charts.PieChart);
 
@@ -342,7 +325,6 @@ export default Vue.extend({
       const legendContainer = am4core.create('legend-pie-div', am4core.Container);
       legendContainer.width = am4core.percent(100);
       legendContainer.height = am4core.percent(100);
-      chart.legend.parent = legendContainer;
 
       function resizeLegend() {
         const el: HTMLElement | null = document.getElementById('legend-pie-div');
@@ -353,7 +335,7 @@ export default Vue.extend({
             el.style.height = newHeight;
             setTimeout(() => {
               chart.legend.labels.template.width = am4core.percent(100);
-            }, 1000);
+            }, 100);
           }
         }
       }
@@ -361,6 +343,7 @@ export default Vue.extend({
       chart.legend.events.on('sizechanged', resizeLegend);
       chart.legend.events.on('datavalidated', resizeLegend);
 
+      chart.legend.parent = legendContainer;
       // chart.legend.labels.template.truncate = true;
       // chart.legend.labels.template.fullWords = false;
       // chart.legend.itemContainers.template.width = am4core.percent(100);

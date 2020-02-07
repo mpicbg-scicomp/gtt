@@ -85,7 +85,7 @@
     "url": "git+ssh://git@github.com:mpicbg-scicomp/gtt.git"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.0.9",
+    "@amcharts/amcharts4": "~4.4",
     "@johmun/vue-tags-input": "^2.0.0",
     "axios": "^0.18.0",
     "datatables.net": "^1.10.19",
