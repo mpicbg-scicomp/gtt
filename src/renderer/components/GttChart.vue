@@ -222,6 +222,7 @@ export default Vue.extend({
       const legendContainer = am4core.create('legenddiv', am4core.Container);
       legendContainer.width = am4core.percent(100);
       legendContainer.height = am4core.percent(100);
+      chart.legend.parent = legendContainer;
 
       function resizeLegend() {
         const el: HTMLElement | null = document.getElementById('legenddiv');
@@ -239,8 +240,6 @@ export default Vue.extend({
 
       chart.legend.events.on('sizechanged', resizeLegend);
       chart.legend.events.on('datavalidated', resizeLegend);
-
-      chart.legend.parent = legendContainer;
       // chart.legend.labels.template.truncate = true;
       // chart.legend.labels.template.fullWords = false;
       // chart.legend.itemContainers.template.width = am4core.percent(100);
@@ -325,6 +324,7 @@ export default Vue.extend({
       const legendContainer = am4core.create('legend-pie-div', am4core.Container);
       legendContainer.width = am4core.percent(100);
       legendContainer.height = am4core.percent(100);
+      chart.legend.parent = legendContainer;
 
       function resizeLegend() {
         const el: HTMLElement | null = document.getElementById('legend-pie-div');
@@ -342,8 +342,6 @@ export default Vue.extend({
 
       chart.legend.events.on('sizechanged', resizeLegend);
       chart.legend.events.on('datavalidated', resizeLegend);
-
-      chart.legend.parent = legendContainer;
       // chart.legend.labels.template.truncate = true;
       // chart.legend.labels.template.fullWords = false;
       // chart.legend.itemContainers.template.width = am4core.percent(100);
