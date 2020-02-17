@@ -1,3 +1,6 @@
+## 1.1.1
+- Correct typo of "Preference"
+
 ## 1.1.0
 - The public version of gtt starts from this version
 - User projects are supported
