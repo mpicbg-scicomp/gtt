@@ -1,5 +1,6 @@
 ## 1.1.1
-- Correct typo of "Preference"
+- Correct typo of "Preference" (Thanks to [@adomingues](https://github.com/adomingues))
+- Add Today option in Date Range (Thanks to [@lhersemann](https://github.com/lhersemann))
 
 ## 1.1.0
 - The public version of gtt starts from this version

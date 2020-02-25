@@ -62,8 +62,11 @@ import FetchLabels from '@/components/FetchLabels.vue';
 import TagsInput from '@/components/TagsInput.vue';
 import DropDown from '@/components/Dropdown.vue';
 
-const currentYear = new Date().getFullYear();
+const today = new Date();
+const currentYear = today.getFullYear();
 const previousYear = currentYear - 1;
+const thisMonth = today.getMonth();
+const thisDay = today.getDate();
 
 export default {
   name: 'home',
@@ -143,6 +146,14 @@ export default {
           text: currentYear + '\' 4/4 Q',
           onClick(self) {
             self.currentValue = [new Date(currentYear, 9, 1), new Date(currentYear, 11, 31)];
+            self.updateDate(true);
+          },
+        },
+        {
+          // eslint-disable-next-line
+          text: 'Today',
+          onClick(self) {
+            self.currentValue = [new Date(currentYear, thisMonth, thisDay + 1), new Date(currentYear, thisMonth, thisDay + 2)];
             self.updateDate(true);
           },
         },
