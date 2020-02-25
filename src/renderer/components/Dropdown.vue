@@ -3,7 +3,7 @@
   <button class="dropbtn"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button>
   <div class="dropdown-content">
     <router-link to="/" class="dropdown-item inline-block text-grey no-underline font-bold" exact-active-class="text-blue-dark">Home</router-link>
-    <router-link to="/preference" class="dropdown-item inline-block text-grey no-underline font-bold" exact-active-class="text-blue-dark">Preferences</router-link>
+    <router-link to="/preferences" class="dropdown-item inline-block text-grey no-underline font-bold" exact-active-class="text-blue-dark">Preferences</router-link>
   </div>
 </div>
 </template>

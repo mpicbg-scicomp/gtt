@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/views/Home.vue';
-import Preference from '@/views/Preference.vue';
+import Preferences from '@/views/Preferences.vue';
 
 Vue.use(Router);
 
@@ -14,9 +14,9 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/preference',
-      name: 'preference',
-      component: Preference,
+      path: '/preferences',
+      name: 'preferences',
+      component: Preferences,
     },
     {
       path: '*',
