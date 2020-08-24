@@ -1,6 +1,7 @@
 ## 1.1.1
 - Correct typo of "Preference" (Thanks to [@adomingues](https://github.com/adomingues))
 - Add Today option in Date Range (Thanks to [@lhersemann](https://github.com/lhersemann))
+- Add "Internal or External" project tag for export function
 
 ## 1.1.0
 - The public version of gtt starts from this version
