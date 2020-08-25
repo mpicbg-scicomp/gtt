@@ -428,7 +428,7 @@
             const personScope = personData[t.user];
             if (!(projectId in personScope)) {
               personScope[projectId] = {
-                name: d.projectName, tags: d.projectTags, url: d.projectWebUrl, intOrExt: '', seconds: 0,
+                name: d.projectName, tags: d.projectTags, url: d.projectWebUrl, seconds: 0,
               };
             }
 
@@ -445,11 +445,6 @@
             }
 
             const issueScope = projectScope[issueId];
-            projectScope.intOrExt = issueScope.labels.includes('Internal') ? 'Internal' : 'External';
-            if (projectScope.intOrExt === 'External') {
-              projectScope.intOrExt = issueScope.labels.includes('External') ? 'External' : '';
-            }
-            // console.log(projectScope.intOrExt);
 
             // eslint-disable-next-line
             issueScope.seconds += t.seconds;
@@ -474,7 +469,7 @@
             // const actualTags = extractProjectTags(prj.tags);
             // Extract issue collection
             const issues = _.reduce(prj, (result, value, key) => {
-              if (key === 'name' || key === 'tags' || key === 'seconds' || key === 'url' || key === 'intOrExt') return result;
+              if (key === 'name' || key === 'tags' || key === 'seconds' || key === 'url') return result;
               const url = `${prjUrl}/issues/${value.issueId}`;
               result.push(`${Number((value.seconds / 3600).toFixed(2))}_${value.name} ${url};;;`);
               return result;
@@ -489,7 +484,7 @@
               Group: _.toUpper(prjDetail.group || 'unknown'),
               'Who Project is For': prjDetail.contact || 'unknown',
               'Full Project Title': `${_.capitalize(key)} : ${prjDetail.title || prj.name}`,
-              'Internal or External': prj.intOrExt,
+              'Internal/External': prjDetail.intOrExt,
               summary_billing_description: issues,
               summary_hours: Number((_.reduce(prj, (sum, value, key) => (key === 'seconds' ? sum + value : sum), 0) / 3600).toFixed(2)),
             });

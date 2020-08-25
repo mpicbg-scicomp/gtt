@@ -9,6 +9,10 @@ export function parseProjectTags(tags: any) {
       result.group = _.replace(value, 'group:', '').trim();
     } else if (value.startsWith('title:')) {
       result.title = _.replace(value, 'title:', '').trim();
+    } else if (value.toLowerCase() === 'internal') {
+      result.intOrExt = 'Internal';
+    } else if (value.toLowerCase() === 'external') {
+      result.intOrExt = 'External';
     }
     return result;
   }, {});
