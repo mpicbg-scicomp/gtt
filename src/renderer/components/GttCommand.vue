@@ -137,9 +137,19 @@ export default Vue.extend({
         config.set('subgroups', 'true');
       }
 
+      function pad(number) {
+        if (number < 10) {
+          return `0${number}`;
+        }
+        return number;
+      }
+
       if (!_.isEmpty(dateRange) && dateRange[0]) {
-        config.set('from', dateRange[0].toISOString().slice(0, 10));
-        config.set('to', dateRange[1].toISOString().slice(0, 10));
+        const from = `${dateRange[0].getFullYear()}-${pad(dateRange[0].getMonth() + 1)}-${pad(dateRange[0].getDate())}`;
+        const to = `${dateRange[1].getFullYear()}-${pad(dateRange[1].getMonth() + 1)}-${pad(dateRange[1].getDate())}`;
+        // console.log(`${from} - ${to}`);
+        config.set('from', from);
+        config.set('to', to);
       }
 
       if (!_.isEmpty(tags)) {

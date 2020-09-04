@@ -153,7 +153,7 @@ export default {
           // eslint-disable-next-line
           text: 'Today',
           onClick(self) {
-            self.currentValue = [new Date(currentYear, thisMonth, thisDay + 1), new Date(currentYear, thisMonth, thisDay + 2)];
+            self.currentValue = [new Date(currentYear, thisMonth, thisDay), new Date(currentYear, thisMonth, thisDay)];
             self.updateDate(true);
           },
         },
