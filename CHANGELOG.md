@@ -1,3 +1,7 @@
+## 1.1.2
+- Fixed date range automatically changed to UTC (Thanks to [@walkernoreen](https://github.com/walkernoreen))
+- Add "Internal or External" information in the Person table (Thanks to [@lhersemann](https://github.com/lhersemann))
+
 ## 1.1.1
 - Correct typo of "Preference" (Thanks to [@adomingues](https://github.com/adomingues))
 - Add Today option in Date Range (Thanks to [@lhersemann](https://github.com/lhersemann))
