@@ -204,6 +204,7 @@
               group: _.toUpper(prjDetail.group || 'unknown'),
               contact: prjDetail.contact || 'unknown',
               title: prjDetail.title || prj.name,
+              intOrExt: prjDetail.intOrExt || 'unknown',
               projectWebUrl: prjUrl,
               tags: actualTags,
               totalSpent: Number((_.reduce(prj, (sum, value, key) => (key === 'seconds' ? sum + value : sum), 0) / 3600).toFixed(2)),
@@ -245,6 +246,10 @@
             fnCreatedCell: (nTd, sData, oData) => {
               $(nTd).html(`<a class="url-project-link">${oData.title}</a>${vm.createLabels(oData.tags)}`);
             },
+          },
+          {
+            title: 'Internal/External',
+            data: 'intOrExt',
           },
           {
             title: 'Tags',
