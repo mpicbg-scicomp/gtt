@@ -221,7 +221,7 @@ export default Vue.extend({
             resolve();
           });
       })
-        .then(() => console.log(`Selected projects: ${reports.reports.map(r => r.project.name).join(', ')}`))
+        .then(() => console.log(`Selected projects: ${reports.reports.map(r => _.values(r.projects)[0]).join(', ')}`))
         .then(() => new Promise((resolve) => {
           reports
             .forEach((report, done) => {
