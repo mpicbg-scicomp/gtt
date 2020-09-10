@@ -1,3 +1,7 @@
+## 1.1.3
+- Fixed a bug of fetching null object from the project array
+- Fixed time spent chart treated date string incorrectly
+
 ## 1.1.2
 - Fixed date range automatically changed to UTC (Thanks to [@walkernoreen](https://github.com/walkernoreen))
 - Add "Internal or External" information in the Person table (Thanks to [@lhersemann](https://github.com/lhersemann))
