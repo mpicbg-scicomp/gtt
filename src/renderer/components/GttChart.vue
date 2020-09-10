@@ -114,11 +114,20 @@ export default Vue.extend({
       firstDate.setDate(firstDate.getDate() - days);
       firstDate.setHours(0, 0, 0, 0);
 
+      function pad(number) {
+        if (number < 10) {
+          return `0${number}`;
+        }
+        return number;
+      }
+
       if (!_.isEmpty(vm.dateRange) && vm.dateRange[0]) {
-        const date1 = moment(vm.dateRange[0]);
-        const date2 = moment(vm.dateRange[1]);
+        const from = `${vm.dateRange[0].getFullYear()}-${pad(vm.dateRange[0].getMonth() + 1)}-${pad(vm.dateRange[0].getDate())}`;
+        const to = `${vm.dateRange[1].getFullYear()}-${pad(vm.dateRange[1].getMonth() + 1)}-${pad(vm.dateRange[1].getDate())}`;
+        const date1 = moment(from);
+        const date2 = moment(to);
         days = date2.diff(date1, 'days') + 1;
-        firstDate = vm.dateRange[0];
+        firstDate = new Date(from);
       }
 
       keys.forEach((key) => {
