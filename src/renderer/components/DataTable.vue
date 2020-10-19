@@ -122,8 +122,8 @@
       createLabels(labels) {
         const ret = [' '];
         _.forEach(labels, (d) => {
-          if (d in categoryTable) {
-            ret.push(`<span class="badge badge-pill badge-${categoryTable[d]}">`);
+          if (d.toLowerCase() in categoryTable) {
+            ret.push(`<span class="badge badge-pill badge-${categoryTable[d.toLowerCase()]}">`);
           } else {
             ret.push('<span class="badge badge-pill badge-default">');
           }
@@ -528,7 +528,7 @@
         const pref = store.get('pref');
 
         billingClassTable = JSON.parse(pref.userGroups);
-        categoryTable = JSON.parse(pref.tagColors);
+        categoryTable = JSON.parse(pref.tagColors.toLowerCase());
       }
 
       vm.createTable(vm.id, vm.data);
