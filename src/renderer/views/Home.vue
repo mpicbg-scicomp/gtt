@@ -119,6 +119,14 @@ export default {
         },
         {
           // eslint-disable-next-line
+          text: 'Week',
+          onClick(self) {
+            self.currentValue = [new Date(currentYear, thisMonth, thisDay - 7), new Date(currentYear, thisMonth, thisDay)];
+            self.updateDate(true);
+          },
+        },
+        {
+          // eslint-disable-next-line
           text: currentYear + '\' 1/4 Q',
           onClick(self) {
             self.currentValue = [new Date(currentYear, 0, 1), new Date(currentYear, 2, 31)];
