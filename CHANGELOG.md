@@ -1,3 +1,7 @@
+## 1.1.4
+- Made labels toLowerCase() to compare them properly
+- Added "this week" in the short-cuts of DATE input
+
 ## 1.1.3
 - Fixed a bug of fetching null object from the project array
 - Fixed time spent chart treated date string incorrectly
