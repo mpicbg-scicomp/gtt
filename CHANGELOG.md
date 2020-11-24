@@ -1,3 +1,4 @@
+=======
 ## 1.1.4
 - Made labels toLowerCase() to compare them properly
 - Added "this week" in the short-cuts of DATE input
