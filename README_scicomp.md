@@ -6,6 +6,7 @@ Please, use the below json User Groups and Tag Colors
   "brandl": "Bioinformatics Consultation/Analysis",
   "domingue": "Bioinformatics Consultation/Analysis",
   "herseman": "Bioinformatics Consultation/Analysis",
+  "gohr": "Bioinformatics Consultation/Analysis",
   "walker": "BioImage Informatics support",
   "nadar": "BioImage Informatics support",
   "moon": "SciDev support",
