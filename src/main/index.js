@@ -31,6 +31,11 @@ function createWindow() {
     height: 580,
     useContentSize: true,
     width: 900,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+    },
   });
 
   // mainWindow.webContents.openDevTools();
@@ -82,12 +87,10 @@ app.on('ready', createWindow);
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
-  } else {
-    if (mainWindow !== null) {
-      mainWindow.webContents.session.clearCache(() => {
-        console.log("cache cleared.")
-      });
-    }
+  } else if (mainWindow !== null) {
+    mainWindow.webContents.session.clearCache(() => {
+      console.log('cache cleared.');
+    });
   }
 });
 
