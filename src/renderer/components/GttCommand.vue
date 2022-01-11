@@ -221,14 +221,23 @@ export default Vue.extend({
             resolve();
           });
       })
-        .then(() => console.log(`Selected projects: ${reports.reports.map(r => _.values(r.projects)[0]).join(', ')}`))
+        .then(() => console.log(`Selected projects: ${project} ${reports.reports.map(r => _.values(r.projects)[0]).join(', ')}`))
         .then(() => new Promise((resolve) => {
           reports
             .forEach((report, done) => {
-              report.getIssues()
-                .then(() => {
-                  done();
+              if (report.project) {
+                report.getIssues()
+                  .then(() => {
+                    done();
+                  });
+              } else {
+                report.getProject().then(() => {
+                  report.getIssues()
+                    .then(() => {
+                      done();
+                    });
                 });
+              }
             })
             .catch(error => console.error('could not fetch issues.', error))
             .then(() => resolve());
