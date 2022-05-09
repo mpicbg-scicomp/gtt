@@ -500,7 +500,7 @@
       },
       exportTsv() {
         const vm = this;
-        const file = this.$electron.remote.dialog.showSaveDialog({
+        this.$electron.remote.dialog.showSaveDialog({
           title: 'Please enter a file name',
           filters: [
             {
@@ -508,16 +508,16 @@
               extensions: ['tsv'],
             },
           ],
-        });
+        }).then((result) => {
+          // console.log(result);
+          const fs = require('fs');
+          const tsv = require('tsv');
 
-        if (file === undefined) {
-          return;
-        }
-
-        const fs = require('fs');
-        const tsv = require('tsv');
-        fs.writeFile(file, tsv.stringify(vm.exportPersonData(vm.data)), 'utf8', () => {
-          console.log('file written');
+          fs.writeFile(result.filePath, tsv.stringify(vm.exportPersonData(vm.data)), 'utf8', () => {
+            console.log('file written');
+          });
+        }).catch((err) => {
+          console.error(err);
         });
       },
     },
