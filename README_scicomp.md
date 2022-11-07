@@ -23,6 +23,7 @@ Please, use the below json User Groups and Tag Colors
   "Bioinformatics": "primary",
   "HPC": "primary",
   "SciDev": "primary",
+  "ELN_RDM": "primary",
   "Awaiting_Feedback": "success",
   "Queued": "success",
   "Internal": "warning",
