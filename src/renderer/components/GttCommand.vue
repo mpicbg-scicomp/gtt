@@ -54,7 +54,7 @@ export default Vue.extend({
       project = projects.shift();
 
       const prj = `${vm.getUrl()}/projects/${encodeURIComponent(project)}/?private_token=${this.token}`;
-      const grp = `${vm.getUrl()}/groups/${encodeURIComponent(project)}/?private_token=${this.token}`;
+      const grp = `${vm.getUrl()}/groups/${encodeURIComponent(project)}/?private_token=${this.token}&simple=true`;
       const userPrj = `${vm.getUrl()}/users/${encodeURIComponent(project)}/projects/?private_token=${this.token}`;
 
       fetch(prj, {
