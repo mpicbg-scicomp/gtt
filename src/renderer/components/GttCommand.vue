@@ -145,6 +145,8 @@ export default Vue.extend({
       }
 
       if (!_.isEmpty(dateRange) && dateRange[0]) {
+        // To include the spent time in the last day for the range
+        dateRange[1].setDate(dateRange[1].getDate() + 1);
         const from = `${dateRange[0].getFullYear()}-${pad(dateRange[0].getMonth() + 1)}-${pad(dateRange[0].getDate())}`;
         const to = `${dateRange[1].getFullYear()}-${pad(dateRange[1].getMonth() + 1)}-${pad(dateRange[1].getDate())}`;
         // console.log(`${from} - ${to}`);

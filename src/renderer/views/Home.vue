@@ -121,7 +121,7 @@ export default {
           // eslint-disable-next-line
           text: 'Week',
           onClick(self) {
-            self.currentValue = [new Date(currentYear, thisMonth, thisDay - 7), new Date(currentYear, thisMonth, thisDay)];
+            self.currentValue = [new Date(currentYear, thisMonth, thisDay - today.getDay() - 7), new Date(currentYear, thisMonth, thisDay - today.getDay())];
             self.updateDate(true);
           },
         },
@@ -198,7 +198,7 @@ export default {
       this.user = localStorage.user;
     }
     // eslint-disable-next-line
-    this.dateRange = [new Date(Date.now() - 3600 * 1000 * 24 * 30), new Date()];
+    this.dateRange = [new Date(currentYear, thisMonth, thisDay - today.getDay() - 7), new Date(currentYear, thisMonth, thisDay - today.getDay())];
   },
   mounted() {
     // this.refresh();
