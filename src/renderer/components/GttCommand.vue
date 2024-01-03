@@ -172,7 +172,7 @@ export default Vue.extend({
       const projectTags = {};
       const projectUrls = {};
 
-      new Promise((resolve, reject) => {
+      new Promise<void>((resolve, reject) => {
         owner.authorized()
           .catch(e => console.error('Invalid access token!', e))
           .then(() => owner.parallel(projects, (project, done) => {
@@ -190,7 +190,7 @@ export default Vue.extend({
               case 'group': {
                 owner.getGroup()
                   .then(() => {
-                    if (!config.get('subgroups')) return new Promise(r => r());
+                    if (!config.get('subgroups')) return new Promise<void>(r => r());
                     return owner.getSubGroups();
                   })
                   .then(() => owner.getProjectsByGroup()
@@ -224,7 +224,7 @@ export default Vue.extend({
           });
       })
         .then(() => console.log(`Selected projects: ${project} ${reports.reports.map(r => _.values(r.projects)[0]).join(', ')}`))
-        .then(() => new Promise((resolve) => {
+        .then(() => new Promise<void>((resolve) => {
           reports
             .forEach((report, done) => {
               if (report.project) {
@@ -244,7 +244,7 @@ export default Vue.extend({
             .catch(error => console.error('could not fetch issues.', error))
             .then(() => resolve());
         }))
-        .then(() => new Promise((resolve) => {
+        .then(() => new Promise<void>((resolve) => {
           reports
             .forEach((report, done) => {
               projectTags[report.project.id] = report.project.data.tag_list;
@@ -255,12 +255,12 @@ export default Vue.extend({
             .catch(error => console.error('could not merge reports.', error))
             .then(() => resolve());
         }))
-        .then(() => new Promise((resolve) => {
+        .then(() => new Promise<void>((resolve) => {
           master.processIssues()
             .catch(error => console.error('could not process issues.', error))
             .then(() => resolve());
         }))
-        .then(() => new Promise((resolve) => {
+        .then(() => new Promise<void>((resolve) => {
           const issues: {id, projectId, projectName, projectTags, projectWebUrl, title, totalSpent, labels, details}[] = [];
 
           master.issues.forEach((issue) => {
