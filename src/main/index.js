@@ -1,5 +1,8 @@
 import { app, BrowserWindow, session, dialog } from 'electron' // eslint-disable-line
 import { autoUpdater } from 'electron-updater';
+
+require('@electron/remote/main').initialize();
+
 const log = require('electron-log');
 
 autoUpdater.logger = log;
@@ -39,6 +42,7 @@ function createWindow() {
   });
 
   // mainWindow.webContents.openDevTools();
+  require('@electron/remote/main').enable(mainWindow.webContents);
 
   mainWindow.loadURL(winURL);
 
@@ -56,6 +60,7 @@ function createWindow() {
   //     },
   //   });
   // });
+  require('electron-store').initRenderer();
 }
 
 autoUpdater.on('checking-for-update', () => {

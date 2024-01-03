@@ -184,7 +184,7 @@ export default {
     },
   },
   created() {
-    this.version = this.$electron.remote.app.getVersion();
+    this.version = require('@electron/remote').app.getVersion();
 
     if (localStorage.apiKey) {
       this.token = localStorage.apiKey;

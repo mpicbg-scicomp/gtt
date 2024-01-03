@@ -500,7 +500,7 @@
       },
       exportTsv() {
         const vm = this;
-        this.$electron.remote.dialog.showSaveDialog({
+        require('@electron/remote').dialog.showSaveDialog({
           title: 'Please enter a file name',
           filters: [
             {
