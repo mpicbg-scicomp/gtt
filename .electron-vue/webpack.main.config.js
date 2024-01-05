@@ -16,6 +16,7 @@ let mainConfig = {
     ...Object.keys(dependencies || {})
   ],
   module: {
+    exprContextCritical: false,
     rules: [
       {
         test: /\.(js)$/,

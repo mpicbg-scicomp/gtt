@@ -66,11 +66,11 @@ function createWindow() {
 autoUpdater.on('checking-for-update', () => {
   sendStatusToWindow('Checking for update...');
 });
-autoUpdater.on('update-available', (info) => {
-  sendStatusToWindow('Update available.' + info); // eslint-disable-line
+autoUpdater.on('update-available', () => {
+  sendStatusToWindow('Update available.'); // eslint-disable-line
 });
-autoUpdater.on('update-not-available', (info) => {
-  sendStatusToWindow('Update not available.' + info); // eslint-disable-line
+autoUpdater.on('update-not-available', () => {
+  sendStatusToWindow('Update not available.'); // eslint-disable-line
 });
 autoUpdater.on('error', (err) => {
   sendStatusToWindow('Error in auto-updater.' + err); // eslint-disable-line
