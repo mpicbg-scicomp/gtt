@@ -52,6 +52,8 @@
     },
     "mac": {
       "icon": "build/icons/icon.icns",
+      "strictVerify": false,
+      "gatekeeperAssess": false,
       "type": "development",
       "category": "public.app-category.utilities"
     },

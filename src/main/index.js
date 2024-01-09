@@ -109,19 +109,28 @@ autoUpdater.on('update-downloaded', (info) => {
   // Wait 5 seconds, then quit and install
   // In your application, you don't need to wait 5 seconds.
   // You could call autoUpdater.quitAndInstall(); immediately
-  setTimeout(() => {
-    const dialogOpts = {
-      type: 'info',
-      buttons: ['Restart', 'Later'],
-      title: 'Application Update',
-      message: info.releaseName,
-      detail: 'A new version has been downloaded. Restart the application to apply the updates.',
-    };
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: info.releaseName,
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.',
+  };
 
-    dialog.showMessageBox(dialogOpts, (response) => {
-      if (response === 0) autoUpdater.quitAndInstall();
-    });
-  }, 5000);
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) {
+      setImmediate(() => {
+        mainWindow.setClosable(true);
+        app.removeAllListeners('window-all-closed');
+        BrowserWindow.getAllWindows().forEach((window) => {
+          window.removeAllListeners('close');
+          window.setClosable(true);
+          window.close();
+        });
+        autoUpdater.quitAndInstall();
+      });
+    }
+  });
 });
 
 app.on('ready', () => {
