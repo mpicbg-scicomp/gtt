@@ -12,3 +12,5 @@ thumbs.db
 !.gitkeep
 yarn.lock
 package-lock.json
+.env
+cert.p12
