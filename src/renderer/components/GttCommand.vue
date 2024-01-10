@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { parseProjectTags } from './js/Utils';
+import { parseProjectTags, pad } from './js/Utils';
 
 // require modules
 const _ = require('lodash');
@@ -135,13 +135,6 @@ export default Vue.extend({
       } else {
         config.set('type', 'group');
         config.set('subgroups', 'true');
-      }
-
-      function pad(number) {
-        if (number < 10) {
-          return `0${number}`;
-        }
-        return number;
       }
 
       if (!_.isEmpty(dateRange) && dateRange[0]) {

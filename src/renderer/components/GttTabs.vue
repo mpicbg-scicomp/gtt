@@ -7,7 +7,7 @@
           <div v-else>
             <tabs>
               <tab name="Table" selected="true">
-                <data-table id='dataTable' :data='response' :token="token"/>
+                <data-table id='dataTable' :data='response' :dateRange="dateRange" :token="token"/>
               </tab>
               <tab name="Charts">
                 <gtt-chart msg="Timeline Chart" :data='response' :dateRange="dateRange"/>

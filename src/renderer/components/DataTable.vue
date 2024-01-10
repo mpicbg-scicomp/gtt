@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import { parseProjectTags, extractProjectTags } from './js/Utils';
+  import { parseProjectTags, extractProjectTags, pad } from './js/Utils';
 
   const Store = require('electron-store');
   const store = new Store();
@@ -86,7 +86,7 @@
 
   export default {
     name: 'data-table',
-    props: ['id', 'data', 'token'],
+    props: ['id', 'data', 'token', 'dateRange'],
     data() {
       return {
         selectedItem: 'Issue',
@@ -205,6 +205,7 @@
               contact: prjDetail.contact || 'unknown',
               title: prjDetail.title || prj.name,
               intOrExt: prjDetail.intOrExt || 'unknown',
+              costCenter: prjDetail.costCenter || 'unknown',
               projectWebUrl: prjUrl,
               tags: actualTags,
               totalSpent: Number((_.reduce(prj, (sum, value, key) => (key === 'seconds' ? sum + value : sum), 0) / 3600).toFixed(2)),
@@ -225,7 +226,7 @@
             defaultContent: '',
           },
           {
-            title: 'Person',
+            title: 'Team Member',
             data: 'user',
           },
           {
@@ -237,7 +238,7 @@
             data: 'group',
           },
           {
-            title: 'Who Project is for',
+            title: 'User',
             data: 'contact',
           },
           {
@@ -248,7 +249,11 @@
             },
           },
           {
-            title: 'Internal/External',
+            title: 'Cost Center',
+            data: 'costCenter',
+          },
+          {
+            title: 'Affiliation',
             data: 'intOrExt',
           },
           {
@@ -422,6 +427,7 @@
         // Mutate data
         // {user: {projectId: {name, tags, issueId: {name, seconds} } }
         const personData = {};
+        const dateRange = this.getDateRange();
 
         _.forEach(data, (d) => {
           const { projectId } = d;
@@ -484,19 +490,34 @@
             // Construct the person based table data
             output.push({
               // projectId,
-              Person: _.capitalize(key),
-              billing_class: billingClassTable[key],
+              'Team Member': _.capitalize(key),
+              'Billing Class': billingClassTable[key],
               Group: _.toUpper(prjDetail.group || 'unknown'),
-              'Who Project is For': prjDetail.contact || 'unknown',
-              'Full Project Title': `${_.capitalize(key)} : ${prjDetail.title || prj.name}`,
-              'Internal/External': prjDetail.intOrExt,
-              summary_billing_description: issues,
-              summary_hours: Number((_.reduce(prj, (sum, value, key) => (key === 'seconds' ? sum + value : sum), 0) / 3600).toFixed(2)),
+              User: prjDetail.contact || 'unknown',
+              'Project Title': `${_.capitalize(key)} : ${prjDetail.title || prj.name}`,
+              'Cost Center': prjDetail.costCenter || 'unknown',
+              Affiliation: prjDetail.intOrExt,
+              'Project URL': prjUrl,
+              'Time Period': dateRange,
+              'Billing Description Summary': issues,
+              'Total Hours': Number((_.reduce(prj, (sum, value, key) => (key === 'seconds' ? sum + value : sum), 0) / 3600).toFixed(2)),
+              'PPMS Comment': `Project: ${prjDetail.title || prj.name}; URL: ${prjUrl}, Team Member: ${_.capitalize(key)}; Time Period: ${dateRange}`,
             });
           });
         });
 
         return output;
+      },
+      getDateRange() {
+        const vm = this;
+        const { dateRange } = vm;
+        if (!_.isEmpty(dateRange) && dateRange[0]) {
+          // To include the spent time in the last day for the range
+          const from = `${dateRange[0].getFullYear()}-${pad(dateRange[0].getMonth() + 1)}-${pad(dateRange[0].getDate())}`;
+          const to = `${dateRange[1].getFullYear()}-${pad(dateRange[1].getMonth() + 1)}-${pad(dateRange[1].getDate())}`;
+          return `${from} ~ ${to}`;
+        }
+        return '';
       },
       exportTsv() {
         const vm = this;
