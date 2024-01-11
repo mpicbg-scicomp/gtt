@@ -169,6 +169,7 @@ let rendererConfig = {
   output: {
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
+    hashFunction: 'sha512',
     libraryTarget: 'commonjs2',
     path: path.join(__dirname, '../dist/electron')
   },

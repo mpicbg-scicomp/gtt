@@ -137,6 +137,7 @@ let webConfig = {
   output: {
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
+    hashFunction: 'sha512',
     path: path.join(__dirname, '../dist/web')
   },
   resolve: {

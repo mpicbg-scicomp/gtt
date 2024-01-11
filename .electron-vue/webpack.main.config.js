@@ -46,6 +46,7 @@ let mainConfig = {
   },
   output: {
     filename: '[name].js',
+    hashFunction: 'sha512',
     libraryTarget: 'commonjs2',
     path: path.join(__dirname, '../dist/electron')
   },
