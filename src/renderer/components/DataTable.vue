@@ -494,14 +494,14 @@
               'Billing Class': billingClassTable[key],
               Group: _.toUpper(prjDetail.group || 'unknown'),
               User: prjDetail.contact || 'unknown',
-              'Project Title': `${_.capitalize(key)} : ${prjDetail.title || prj.name}`,
+              'Project Title': `${prjDetail.title || prj.name}`,
               'Cost Center': prjDetail.costCenter || 'unknown',
               Affiliation: prjDetail.intOrExt,
               'Project URL': prjUrl,
               'Time Period': dateRange,
               'Billing Description Summary': issues,
               'Total Hours': Number((_.reduce(prj, (sum, value, key) => (key === 'seconds' ? sum + value : sum), 0) / 3600).toFixed(2)),
-              'PPMS Comment': `Project: ${prjDetail.title || prj.name}; URL: ${prjUrl}, Team Member: ${_.capitalize(key)}; Time Period: ${dateRange}`,
+              'PPMS Comment': `Project: ${prjDetail.title || prj.name}; URL: ${prjUrl}; Team Member: ${_.capitalize(key)}; Time Period: ${dateRange}`,
             });
           });
         });
@@ -512,6 +512,7 @@
         const vm = this;
         const { dateRange } = vm;
         if (!_.isEmpty(dateRange) && dateRange[0]) {
+          dateRange[1].setDate(dateRange[1].getDate() - 1);
           // To include the spent time in the last day for the range
           const from = `${dateRange[0].getFullYear()}-${pad(dateRange[0].getMonth() + 1)}-${pad(dateRange[0].getDate())}`;
           const to = `${dateRange[1].getFullYear()}-${pad(dateRange[1].getMonth() + 1)}-${pad(dateRange[1].getDate())}`;
