@@ -1,0 +1,79 @@
+# This file is a template, and might need editing before it works on your project.
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
+
+# This is a sample GitLab CI/CD configuration file that should run without any modifications.
+# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
+# it uses echo commands to simulate the pipeline execution.
+#
+# A pipeline is composed of independent jobs that run scripts, grouped into stages.
+# Stages run in sequential order, but jobs within stages run in parallel.
+#
+# For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
+
+variables:
+  GIT_SSL_NO_VERIFY: "true"
+  ELECTRON_CACHE: ".cache/electron"
+  ELECTRON_BUILDER_CACHE: ".cache/electron-builder"
+
+#cache:
+#  paths:
+#    - node_modules/
+#    - .cache/electron/
+#    - .cache/electron-builder/
+
+stages:          # List of stages for jobs, and their order of execution
+  - build-win
+  - build-mac
+  - build-linux
+#  - test
+#  - deploy
+
+before_script:
+#  - npm install --global windows-build-tools@4.0.0
+
+build-win-job:          # for windows
+  tags:
+    - windows
+  stage: build-win
+  script:
+    - echo $env:Path
+    - $env:Path += ";C:\ProgramData\chocolatey;C:\Windows\system32\config\systemprofile\.windows-build-tools\;C:\Python27\;C:\Program Files\nodejs"
+    - systeminfo /fo csv | ConvertFrom-Csv | select OS* | Format-List
+    - echo $env:Path
+    - node -v
+    - Set-Variable -Name "time" -Value (date -Format "%H:%m")
+    - echo ${time}
+    - echo "started by ${GITLAB_USER_NAME}"
+    - npm -v
+    - npm --force install
+    - ./run.ps1
+    - npm run publish:win
+  only:
+    - master
+
+build-mac-job:          # for mac
+  tags:
+    - mac
+  stage: build-mac
+  script:
+    - echo $CERTIFICATE_P12 | base64 --decode > cert.p12
+    - npm --force install
+    - npm run publish:mac
+  only:
+    - master
+
+build-linux-job:        # for linux
+  tags:
+    - ubuntu
+  stage: build-linux
+  script:
+    - export NVM_DIR="$HOME/.nvm"
+    - source $NVM_DIR/nvm.sh
+    - source $NVM_DIR/bash_completion
+    - npm --force install
+    - npm run publish:linux
+  only:
+    - master
