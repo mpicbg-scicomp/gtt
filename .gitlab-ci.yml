@@ -73,7 +73,13 @@ build-linux-job:        # for linux
   script:
     - export NVM_DIR="$HOME/.nvm"
     - source $NVM_DIR/nvm.sh
+    - export PYENV_ROOT="$HOME/.pyenv"
+    - export PATH="$PYENV_ROOT/bin:$PATH"
+    - pyenv global 3.6.5
+    - source $NVM_DIR/nvm.sh
     - source $NVM_DIR/bash_completion
+    - export PYTHON="/home/gitlab-runner/.pyenv/versions/3.6.5"
+    - export PATH="$PYTHON/bin:$PATH"
     - npm --force install
     - npm run publish:linux
   only:
