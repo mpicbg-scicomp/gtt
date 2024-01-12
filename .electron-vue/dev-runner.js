@@ -7,14 +7,12 @@ const { say } = require('cfonts')
 const { spawn } = require('child_process')
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
-const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
 
 let electronProcess = null
 let manualRestart = false
-let hotMiddleware
 
 function logStats (proc, data) {
   let log = ''
@@ -43,37 +41,23 @@ function startRenderer () {
     rendererConfig.entry.renderer = [path.join(__dirname, 'dev-client')].concat(rendererConfig.entry.renderer)
     rendererConfig.mode = 'development'
     const compiler = webpack(rendererConfig)
-    hotMiddleware = webpackHotMiddleware(compiler, {
-      log: false,
-      heartbeat: 2500
-    })
-
-    compiler.hooks.compilation.tap('compilation', compilation => {
-      compilation.hooks.htmlWebpackPluginAfterEmit.tapAsync('html-webpack-plugin-after-emit', (data, cb) => {
-        hotMiddleware.publish({ action: 'reload' })
-        cb()
-      })
-    })
 
     compiler.hooks.done.tap('done', stats => {
       logStats('Renderer', stats)
     })
 
     const server = new WebpackDevServer(
-      compiler,
       {
-        contentBase: path.join(__dirname, '../'),
-        quiet: true,
-        before (app, ctx) {
-          app.use(hotMiddleware)
-          ctx.middleware.waitUntilValid(() => {
-            resolve()
-          })
-        }
-      }
+        hot: true,
+        static: { directory: path.join(__dirname, '../'), publicPath: '/' },
+        port: 9080,
+      },
+      compiler
     )
 
-    server.listen(9080)
+    server.startCallback(() => {
+      resolve();
+    });
   })
 }
 
@@ -82,12 +66,6 @@ function startMain () {
     mainConfig.entry.main = [path.join(__dirname, '../src/main/index.dev.js')].concat(mainConfig.entry.main)
     mainConfig.mode = 'development'
     const compiler = webpack(mainConfig)
-
-    compiler.hooks.watchRun.tapAsync('watch-run', (compilation, done) => {
-      logStats('Main', chalk.white.bold('compiling...'))
-      hotMiddleware.publish({ action: 'compiling' })
-      done()
-    })
 
     compiler.watch({}, (err, stats) => {
       if (err) {

@@ -6,7 +6,7 @@ const path = require('path')
 const { dependencies } = require('../package.json')
 const webpack = require('webpack')
 
-const BabiliWebpackPlugin = require('babili-webpack-plugin')
+const MinifyPlugin = require('babel-minify-webpack-plugin');
 
 let mainConfig = {
   entry: {
@@ -46,7 +46,7 @@ let mainConfig = {
   },
   output: {
     filename: '[name].js',
-    hashFunction: 'sha512',
+    hashFunction: 'xxhash64',
     libraryTarget: 'commonjs2',
     path: path.join(__dirname, '../dist/electron')
   },
@@ -75,7 +75,7 @@ if (process.env.NODE_ENV !== 'production') {
  */
 if (process.env.NODE_ENV === 'production') {
   mainConfig.plugins.push(
-    new BabiliWebpackPlugin(),
+    new MinifyPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })

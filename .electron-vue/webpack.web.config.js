@@ -5,14 +5,14 @@ process.env.BABEL_ENV = 'web'
 const path = require('path')
 const webpack = require('webpack')
 
-const BabiliWebpackPlugin = require('babili-webpack-plugin')
+const MinifyPlugin = require('babel-minify-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
 let webConfig = {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
   entry: {
     web: path.join(__dirname, '../src/renderer/main.js')
   },
@@ -50,16 +50,6 @@ let webConfig = {
         use: ['vue-style-loader', 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.html$/,
-        use: 'vue-html-loader'
-      },
-      {
-        test: /\.js$/,
-        use: 'babel-loader',
-        include: [ path.resolve(__dirname, '../src/renderer') ],
-        exclude: /node_modules/
-      },
-      {
         test: /\.vue$/,
         use: {
           loader: 'vue-loader',
@@ -72,6 +62,16 @@ let webConfig = {
             }
           }
         }
+      },
+      {
+        test: /\.html$/,
+        use: 'vue-html-loader'
+      },
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        include: [ path.resolve(__dirname, '../src/renderer') ],
+        exclude: /node_modules/
       },
       {
         test: /\.tsx?$/,
@@ -131,13 +131,13 @@ let webConfig = {
     new webpack.DefinePlugin({
       'process.env.IS_WEB': 'true'
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
   output: {
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
-    hashFunction: 'sha512',
+    hashFunction: 'xxhash64',
     path: path.join(__dirname, '../dist/web')
   },
   resolve: {
@@ -157,10 +157,13 @@ let webConfig = {
  * Adjust webConfig for production settings
  */
 if (process.env.NODE_ENV === 'production') {
-  webConfig.devtool = ''
+  webConfig.devtool = false
 
   webConfig.plugins.push(
-    new BabiliWebpackPlugin(),
+    new MinifyPlugin({
+      removeConsole: true,
+      removeDebugger: true
+    }),
     new CopyWebpackPlugin([
       {
         from: path.join(__dirname, '../static'),
