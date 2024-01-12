@@ -55,13 +55,15 @@
       "strictVerify": false,
       "gatekeeperAssess": false,
       "type": "development",
-      "category": "public.app-category.utilities"
+      "category": "public.app-category.utilities",
+      "forceCodeSigning": true
     },
     "win": {
       "icon": "build/icons/icon.ico",
       "certificateFile": "cert.p12",
       "certificatePassword": "",
-      "publisherName": "MPI-CBG Scientific Computing Facility"
+      "publisherName": "MPI-CBG Scientific Computing Facility",
+      "forceCodeSigning": true
     },
     "nsis": {
       "perMachine": true
