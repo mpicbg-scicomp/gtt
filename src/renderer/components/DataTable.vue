@@ -150,6 +150,7 @@
             if (!(projectId in personScope)) {
               personScope[projectId] = {
                 name: d.projectName,
+                url: d.projectWebUrl,
                 tags: d.projectTags,
                 seconds: 0,
               };
