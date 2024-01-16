@@ -1,4 +1,17 @@
 =======
+## 1.1.7
+- Updated electron version to `26.6.3`
+- CI for gitlab project
+- Support `PPMS`
+
+## 1.1.6
+- fix: bug of not including the last day's spent time
+- feat: the default time range is for the last week
+
+## 1.1.5
+- Getting more than 100 projects
+- Improved the speed of fetching
+
 ## 1.1.4
 - Made labels toLowerCase() to compare them properly
 - Added "this week" in the short-cuts of DATE input
