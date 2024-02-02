@@ -24,7 +24,8 @@
     "unit": "karma start test/unit/karma.conf.js",
     "postinstall": "npm run lint:fix",
     "serve": "vue-cli-service serve",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "release": "commit-and-tag-version"
   },
   "build": {
     "productName": "gtt",
@@ -62,7 +63,7 @@
     "win": {
       "icon": "build/icons/icon.ico",
       "certificateFile": "cert.p12",
-      "publisherName": "MPI-CBG Scientific Computing Facility",
+      "publisherName": "HongKee Moon",
       "forceCodeSigning": true
     },
     "nsis": {
@@ -70,7 +71,7 @@
     },
     "linux": {
       "icon": "build/icons",
-      "vendor": "MPI-CBG Scientific Computing Facility",
+      "vendor": "HongKee Moon",
       "category": "Science",
       "target": [
         "AppImage"
@@ -137,6 +138,7 @@
     "cfonts": "^2.1.2",
     "chai": "^4.1.2",
     "chalk": "^2.4.1",
+    "commit-and-tag-version": "^12.2.0",
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.1.6",
     "css-loader": "^0.28.11",

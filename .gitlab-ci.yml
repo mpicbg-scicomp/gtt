@@ -43,7 +43,7 @@ build-win-job:          # for windows
     - $env:Path += ";C:\ProgramData\chocolatey;C:\Windows\system32\config\systemprofile\.windows-build-tools\;C:\Python27\;C:\Program Files\nodejs"
     - systeminfo /fo csv | ConvertFrom-Csv | select OS* | Format-List
     - echo $env:Path
-    - choco upgrade nodejs -y
+    # - choco upgrade nodejs -y
     - node -v
     - Set-Variable -Name "time" -Value (date -Format "%H:%m")
     - echo ${time}
