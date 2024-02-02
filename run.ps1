@@ -15,3 +15,4 @@ if (Test-Path Env:\CERTIFICATE_P12) {
     $env:WINDOWS_CERTIFICATE_FILE = $filename
 }
 
+(Get-Content node_modules\electron-updater\out\windowsExecutableCodeSignatureVerifier.js).Replace('resolve(result);', 'resolve(null); return;') | Set-Content node_modules\electron-updater\out\windowsExecutableCodeSignatureVerifier.js
