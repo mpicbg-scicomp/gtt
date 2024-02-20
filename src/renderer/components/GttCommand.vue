@@ -281,17 +281,19 @@ export default Vue.extend({
 
             const prjDetail = parseProjectTags(projectTags[issue.project_id]);
             // time records on issue
-            issues.push({
-              id: issue.iid,
-              projectId: issue.project_id,
-              projectName: prjDetail.title || issue.project_namespace,
-              projectTags: projectTags[issue.project_id],
-              projectWebUrl: projectUrls[issue.project_id],
-              title: issue.title,
-              totalSpent: issue.spent,
-              labels: issue.closed ? ['Close'].concat(issue.labels) : ['Open'].concat(issue.labels),
-              details,
-            });
+            if (issue.spent) {
+              issues.push({
+                id: issue.iid,
+                projectId: issue.project_id,
+                projectName: prjDetail.title || issue.project_namespace,
+                projectTags: projectTags[issue.project_id],
+                projectWebUrl: projectUrls[issue.project_id],
+                title: issue.title,
+                totalSpent: issue.spent,
+                labels: issue.closed ? ['Close'].concat(issue.labels) : ['Open'].concat(issue.labels),
+                details,
+              });
+            }
           });
 
           this.response = issues;
