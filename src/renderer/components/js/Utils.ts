@@ -13,8 +13,8 @@ export function parseProjectTags(tags: any) {
       result.intOrExt = 'Internal';
     } else if (value.toLowerCase() === 'external') {
       result.intOrExt = 'External';
-    } else if (value.startsWith('cost center:')) {
-      result.costCenter = _.replace(value, 'cost center:', '').trim();
+    } else if (value.startsWith('financial account:')) {
+      result.financialAccount = _.replace(value, 'financial account:', '').trim();
     }
     return result;
   }, {});
@@ -22,7 +22,7 @@ export function parseProjectTags(tags: any) {
 
 export function extractProjectTags(tags: any) {
   return _.reduce(tags, (result: any, value: any) => {
-    if (!value.startsWith('contact:') && !value.startsWith('group:') && !value.startsWith('title:') && !value.startsWith('cost center:')) {
+    if (!value.startsWith('contact:') && !value.startsWith('group:') && !value.startsWith('title:') && !value.startsWith('financial account:') && !value.startsWith('desc:')) {
       result.push(value);
     }
     return result;

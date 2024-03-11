@@ -206,7 +206,7 @@
               contact: prjDetail.contact || 'unknown',
               title: prjDetail.title || prj.name,
               intOrExt: prjDetail.intOrExt || 'unknown',
-              costCenter: prjDetail.costCenter || 'unknown',
+              financialAccount: prjDetail.financialAccount || 'unknown',
               projectWebUrl: prjUrl,
               tags: actualTags,
               totalSpent: Number((_.reduce(prj, (sum, value, key) => (key === 'seconds' ? sum + value : sum), 0) / 3600).toFixed(2)),
@@ -250,8 +250,8 @@
             },
           },
           {
-            title: 'Cost Center',
-            data: 'costCenter',
+            title: 'Financial Account',
+            data: 'financialAccount',
           },
           {
             title: 'Affiliation',
@@ -496,7 +496,7 @@
               Group: _.toUpper(prjDetail.group || 'unknown'),
               User: prjDetail.contact || 'unknown',
               'Project Title': `${prjDetail.title || prj.name}`,
-              'Cost Center': prjDetail.costCenter || 'unknown',
+              'Financial Account': prjDetail.financialAccount || 'unknown',
               Affiliation: prjDetail.intOrExt,
               'Project URL': prjUrl,
               'Time Period': dateRange,

@@ -108,6 +108,22 @@ export default Vue.extend({
     makeGroupReport(user, project, dateRange, tags, projects) {
       this.makeReport(user, false, project, dateRange, tags, projects);
     },
+    // putDescription(path, data) {
+    //   data.private_token = this.token;
+
+    //   return new Promise((resolve, reject) => {
+    //     fetch(`${path}`, {
+    //       method: 'PUT',
+    //       body: JSON.stringify(data),
+    //       headers: {
+    //         'PRIVATE-TOKEN': this.token,
+    //         'Content-Type': 'application/json',
+    //       },
+    //     }).then((response) => {
+    //       resolve(response);
+    //     }).catch(e => reject(e));
+    //   });
+    // },
     makeReport(user, isProject, project, dateRange, tags, additionalProjects) {
       const vm = this;
 
@@ -240,7 +256,25 @@ export default Vue.extend({
         .then(() => new Promise<void>((resolve) => {
           reports
             .forEach((report, done) => {
-              projectTags[report.project.id] = report.project.data.tag_list;
+              // In case of manipulate project attributes.
+              //
+              // console.log(report.project.data);
+              // let description;
+              // if (report.project.data.tag_list.length !== 0) {
+              //   description = report.project.data.tag_list.join(', ');
+              //   description = description.replaceAll('cost center', 'financial account');
+              //   // console.log(description);
+
+              //   if (report.project.data.description) {
+              //     description = `${description}, desc: "${report.project.data.description.replaceAll(',', '').replaceAll('"', '')}"`;
+              //   }
+
+              //   this.putDescription(`${vm.getUrl()}/projects/${report.project.data.id}`, { description, topics: [] })
+              //     .then((res: any) => res.json())
+              //     .then(res => console.log(res));
+              // }
+              const { description } = report.project.data;
+              projectTags[report.project.id] = description ? report.project.data.description.split(',').map(c => c.trim()) : [];
               projectUrls[report.project.id] = report.project.data.web_url;
               master.merge(report);
               done();
