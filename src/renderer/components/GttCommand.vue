@@ -274,7 +274,7 @@ export default Vue.extend({
               //     .then(res => console.log(res));
               // }
               const { description } = report.project.data;
-              projectTags[report.project.id] = description ? report.project.data.description.split(',').map(c => c.trim()) : [];
+              projectTags[report.project.id] = description ? description.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.trim()) : [];
               projectUrls[report.project.id] = report.project.data.web_url;
               master.merge(report);
               done();
