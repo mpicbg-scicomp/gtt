@@ -1,6 +1,6 @@
 {
   "name": "gtt",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "author": "HongKee Moon <moon@mpi-cbg.de>",
   "description": "Gitlab time tracker",
   "license": "BSD-3-Clause",
@@ -112,6 +112,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
+    "@electron/packager": "^18.3.2",
     "@storybook/addon-actions": "^4.0.11",
     "@storybook/addon-knobs": "^4.0.11",
     "@storybook/addon-options": "^4.0.11",
@@ -144,8 +145,8 @@
     "css-loader": "^0.28.11",
     "del": "^3.0.0",
     "devtron": "^1.4.0",
-    "electron": "~26.6.3",
-    "electron-builder": "^24.9.1",
+    "electron": "^30.0.8",
+    "electron-builder": "^24.13.3",
     "electron-debug": "^3.2.0",
     "electron-devtools-installer": "^3.2.0",
     "eslint": "^4.19.1",
