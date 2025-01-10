@@ -1,9 +1,22 @@
-# gtt
+# GTT
 Gitlab Time Tracker App provides overview of how your team spent time resources.
-
 
 ## Gitlab Time Tracker User Interface
 This application gives an overview of team spent times on specific projects and groups.
+
+## Installation & getting started
+* Please install `GTT` from the proper installation media.
+  * For mac, use `gtt-*.*.*.dmg`
+  * For linux, use `gtt-*.*.*.AppImage`
+  * For windows, use `gtt-Setup-1.2.0.exe`
+
+* Get started
+  * Setup `API key` in `Preferences`
+    - Generate `API key` with `api` scope in your `User settings/Access Tokens` in `GitLab`
+    - Copy the key and paste it into `Gitlab Token` field in `Preferences`
+    - Click `Save`
+  * Enter `Project` and `User` in `Home`
+  * Click `Refresh`
 
 ## How to organize the issues with labs
 Each project has ```topics``` attribute in the gitlab project setting where we add relevant keywords. ```gtt``` parses the specific form of string, ```title: Gitlab Time Tracker, contact: HongKee Moon, group: SCICOMP``` where it accumulate times along with ```title``` and ```group``` for the project management purpose even though other uses spent their time. ```contact``` information is used for specifying who project is for. Those information is visualized in ```Spent time in projects``` and ```Spent time in labs``` pie charts.
